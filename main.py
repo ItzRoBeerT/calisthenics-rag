@@ -6,7 +6,6 @@ from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 from custom_tools import generate_routine_pdf
-from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_core.messages import HumanMessage, AIMessage
 import gradio as gr
@@ -27,11 +26,6 @@ llm = ChatOpenAI(
       }
   },
 )
-
-# AGENTE
-memory = MemorySaver()
-tools = [generate_routine_pdf]
-agent_executor = create_react_agent(llm, tools, checkpointer=memory)
 
 # documento de manual de calistenia
 pdf_path = './c.pdf'

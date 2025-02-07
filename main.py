@@ -155,7 +155,7 @@ demo = gr.ChatInterface(
     examples=[
         "¿Qué ejercicio es bueno para principiantes?",
         "¿qué es mejor entrenar por la mañana o por la tarde?",
-        "Realiza una rutina para principiantes"
+        "Generar rutina"
     ],
     type="messages",
     editable=True,

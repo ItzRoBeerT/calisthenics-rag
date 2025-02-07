@@ -17,7 +17,7 @@ Además, otro ejemplo que también utiliza este proyecto del uso del procesamien
 
 Para la realización de este proyecto se ha utlizado el modelo `google/gemini-flash-1.5`, lo he utilizado debido a que posee una gran capacidad de contexto, una latencia bastante baja para tener una respuesta más rápida y tiene unos costes muy baratos. Puedes ver más detalles si haces click [aquí](https://openrouter.helicone.ai/google/gemini-flash-1.5-8b).
 
-También se ha utilizado el modelo `anthropic/claude-3.5-sonnet`, lo he utilizado porque da unas respuestas muy buenas haciendo que el feedback con el usuario sea mejor y dando mejores respuestas puedes verlo si haces click [aquí](https://openrouter.helicone.ai/anthropic/claude-3.5-sonnet).
+También se ha utilizado el modelo `anthropic/claude-3.5-sonnet`, lo he utilizado porque da unas respuestas muy buenas haciendo que el feedback con el usuario sea mejor, puedes verlo si haces click [aquí](https://openrouter.helicone.ai/anthropic/claude-3.5-sonnet).
 
 También he utilizado `PyPDFLoader` paa cargar el pdf y poder generar la documentación para el modelo de lenguaje.
 

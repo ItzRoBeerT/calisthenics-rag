@@ -16,10 +16,21 @@ import time
 load_dotenv()
 
 # Crear una instancia del modelo de lenguaje
-llm = ChatOpenAI(
+llm_tool = ChatOpenAI(
   openai_api_key=getenv("OPENROUTER_API_KEY"),
   openai_api_base=getenv("OPENROUTER_BASE_URL"),
   model_name="google/gemini-flash-1.5",
+  model_kwargs={
+    "extra_headers":{
+        "Helicone-Auth": f"Bearer "+getenv("HELICONE_API_KEY")
+      }
+  },
+)
+
+llm = ChatOpenAI(
+  openai_api_key=getenv("OPENROUTER_API_KEY"),
+  openai_api_base=getenv("OPENROUTER_BASE_URL"),
+  model_name="anthropic/claude-3.5-sonnet",
   model_kwargs={
     "extra_headers":{
         "Helicone-Auth": f"Bearer "+getenv("HELICONE_API_KEY")
@@ -77,7 +88,7 @@ def chatbot(message, history):
         )
         # Definir el mensaje para el agente
         messages_for_agent = [{"role": "user", "content": prompt}]
-        response = llm.stream(messages_for_agent)
+        response = llm_tool.stream(messages_for_agent)
         exercises_dic_str = ""
 
         for chunk in response:
@@ -103,7 +114,6 @@ def chatbot(message, history):
             yield "Rutina generada y subida a supabase con éxito 🎉"
         except Exception as e:
             yield "❌ Error al subir el archivo a Supabase. Por favor, inténtalo de nuevo."
-                 
     else:
         # Búsqueda de contexto en el vectorstore (RAG)
         relevant_docs = vectorstore.similarity_search(message)
@@ -124,8 +134,11 @@ def chatbot(message, history):
             "Respuesta:"
         )
 
-        # Construcción del historial de mensajes
-        messages = [{"role": "user", "content": final_prompt}] + history
+
+        messages = []
+        for chat_message in history:
+            messages.append(chat_message)
+        messages.append({"role": "user", "content": final_prompt})
 
         # Generación de la respuesta del LLM
         response = llm.stream(messages)

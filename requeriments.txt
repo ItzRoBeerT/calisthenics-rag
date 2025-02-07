@@ -1,0 +1,15 @@
+langchain
+langchain-core
+langchain-huggingface
+langchain-openai
+langchain-text-splitters
+langchain-community
+langgraph
+gradio
+python-dotenv
+supabase
+matplotlib
+pandas
+openai
+tiktoken
+pypdf
